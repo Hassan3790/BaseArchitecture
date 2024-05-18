@@ -16,6 +16,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\01.Core\BaseArchitecture.ApplicationServices\BaseArchitecture.ApplicationServices.csproj" />
       <ProjectReference Include="..\..\02.Infrastructures\BaseArchitecture.Infrastructures.EF\BaseArchitecture.Infrastructures.EF.csproj" />
+      <ProjectReference Include="..\..\02.Infrastructures\BaseArchitecture.Infrastructures.InternalMessaging\BaseArchitecture.Infrastructures.InternalMessaging.csproj" />
     </ItemGroup>
 
 </Project>
