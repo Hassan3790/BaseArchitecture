@@ -1,19 +1,14 @@
-using System.Reflection;
-using BaseArchitecture.Infrastructures.InternalMessaging;
-using Framework.Domain.Events;
+using _04.EndPoints.API.Configs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IMessageDispatcher, MessageDispatcher>(
-    s => 
-        new MessageDispatcher(
-            s, 
-            typeof(IHandleMessage<>), 
-            "Handle", 
-            Assembly.Load("BaseArchitecture.ApplicationServices")));
+
+builder.Services
+    .RegisterDbContext(builder.Configuration)
+    .RegisterMessageDispatcher();
 
 var app = builder.Build();
 

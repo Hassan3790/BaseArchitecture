@@ -66,10 +66,5 @@ namespace BaseArchitecture.Infrastructures.Migrations
             };
             return csb.ConnectionString;
         }
-
-        private static void UpdateDatabase(IServiceProvider serviceProvider)
-        {
-
-        }
     }
 }
