@@ -8,7 +8,8 @@ builder.Services.AddControllers();
 
 builder.Services
     .RegisterDbContext(builder.Configuration)
-    .RegisterMessageDispatcher();
+    .RegisterMessageDispatcher()
+    .RegisterDependency();
 
 var app = builder.Build();
 

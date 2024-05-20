@@ -8,11 +8,9 @@ public class EFDataContext(DbContextOptions<EFDataContext> options) :
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        ChangeTracker.AutoDetectChangesEnabled = false;
-
         modelBuilder
             .ApplyConfigurationsFromAssembly(
-                typeof(EFDataContext).Assembly);
+                GetType().Assembly);
     }
     
     public override ChangeTracker ChangeTracker
@@ -21,7 +19,7 @@ public class EFDataContext(DbContextOptions<EFDataContext> options) :
         {
             var tracker = base.ChangeTracker;
             tracker.LazyLoadingEnabled = false;
-            tracker.AutoDetectChangesEnabled = false;
+            tracker.AutoDetectChangesEnabled = true;
             tracker.QueryTrackingBehavior =
                 QueryTrackingBehavior.TrackAll;
             return tracker;
