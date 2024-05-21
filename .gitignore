@@ -4,3 +4,4 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 /src/03.EndPoints/04.EndPoints.API/04.EndPoints.API.csproj.user
+/.vs/BaseArchitecture
