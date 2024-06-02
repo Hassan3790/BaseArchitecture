@@ -1,5 +1,5 @@
-﻿using BaseArchitecture.ApplicationServices.Employees;
-using BaseArchitecture.ApplicationServices.Employees.Commands;
+﻿using BaseArchitecture.ApplicationServices.Employees.Commands;
+using Framework.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _04.EndPoints.API.Controllers;
@@ -10,7 +10,7 @@ public class EmployeeController : ControllerBase
 {
     [HttpPost]
     public async Task Register(
-        [FromServices] RegisterEmployeeHandler handler,
+        [FromServices] ICommandHandler<RegisterEmployeeCommand> handler,
         [FromBody] RegisterEmployeeCommand command)
     {
         await handler.Handle(command);

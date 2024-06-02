@@ -5,7 +5,7 @@ namespace _04.EndPoints.API.Configs
 {
     public static class HangfireConfig
     {
-        public static void RegisterHangfire(
+        public static IServiceCollection RegisterHangfire(
             this IServiceCollection services,
             string connectionString)
         {
@@ -22,6 +22,8 @@ namespace _04.EndPoints.API.Configs
                     UseRecommendedIsolationLevel = true,
                     DisableGlobalLocks = true
                 }));
+
+            return services;
         }
 
         public static void UseHangfire(this IApplicationBuilder app)

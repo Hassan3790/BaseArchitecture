@@ -1,17 +1,37 @@
-﻿using BaseArchitecture.ApplicationServices.Employees;
-using BaseArchitecture.Domain.Employees.Data;
+﻿using Autofac;
+using BaseArchitecture.ApplicationServices.Employees;
 using BaseArchitecture.Persistence.EF.Employees;
+using Framework.Domain;
 
 namespace _04.EndPoints.API.Configs;
 
 public static class DependencyInjectionConfig
 {
-    public static IServiceCollection RegisterDependency(
-        this IServiceCollection services)
+    public static WebApplicationBuilder RegisterRepository(
+        this WebApplicationBuilder builder)
     {
-        services.AddScoped<RegisterEmployeeHandler>();
-        services.AddScoped<EmployeeRepository, EFEmployeeRepository>();
+        builder
+            .Host
+            .ConfigureContainer<ContainerBuilder>(containerBuilder =>
+            {
+                containerBuilder.RegisterAssemblyTypes(typeof(EFEmployeeRepository).Assembly)
+                    .As(typeof(Repository))
+                    .AsImplementedInterfaces()
+                    .InstancePerLifetimeScope();
+            });
 
-        return services;
-    } 
+        return builder;
+    }
+
+    public static WebApplicationBuilder RegisterICommandHandler(this WebApplicationBuilder builder)
+    {
+        builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+        {
+            containerBuilder.RegisterAssemblyTypes(typeof(RegisterEmployeeHandler).Assembly)
+                .AsClosedTypesOf(typeof(ICommandHandler<>))
+                .InstancePerLifetimeScope();
+        });
+
+        return builder;
+    }
 }
