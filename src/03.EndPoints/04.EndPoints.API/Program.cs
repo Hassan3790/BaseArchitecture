@@ -6,10 +6,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+var connectionString =
+    builder.Configuration
+        .GetValue<string>("connectionString");
+
 builder.Services
-    .RegisterDbContext(builder.Configuration)
+    .RegisterDbContext(connectionString!)
     .RegisterMessageDispatcher()
-    .RegisterDependency();
+    .RegisterDependency()
+    .RegisterHangfire(connectionString!);
 
 var app = builder.Build();
 
@@ -21,5 +26,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
+app.UseHangfire();
 
 app.Run();

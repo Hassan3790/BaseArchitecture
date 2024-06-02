@@ -7,12 +7,8 @@ public static class EFDataContextConfig
 {
     public static IServiceCollection RegisterDbContext(
         this IServiceCollection services,
-        ConfigurationManager configurationManager)
+        string connectionString)
     {
-        var connectionString =
-            configurationManager
-                .GetValue<string>("connectionString");
-        
         services.AddDbContext<EFDataContext>(options =>
         {
             options.UseSqlServer(connectionString);
