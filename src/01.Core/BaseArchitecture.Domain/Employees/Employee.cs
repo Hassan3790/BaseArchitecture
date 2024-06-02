@@ -1,4 +1,5 @@
-﻿using BaseArchitecture.Domain.Employees.ValueObjects;
+﻿using BaseArchitecture.Domain.Employees.Events;
+using BaseArchitecture.Domain.Employees.ValueObjects;
 using Framework.Domain.Entities;
 
 namespace BaseArchitecture.Domain.Employees;
@@ -20,6 +21,8 @@ public class Employee : AggregateRoot
         FullName = fullName;
         NationalCode = nationalCode;
         PhoneNumber = phoneNumber;
+
+        AppendEvent(new EmployeeCreated(employeeId, fullName));
     }
 
     private Employee()
