@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace BaseArchitecture.Infrastructures.EF;
+namespace BaseArchitecture.Persistence.EF;
 
 public class EFDataContext(DbContextOptions<EFDataContext> options) :
     DbContext(options)

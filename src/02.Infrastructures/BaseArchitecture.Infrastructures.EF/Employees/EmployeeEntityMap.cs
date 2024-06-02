@@ -3,7 +3,7 @@ using BaseArchitecture.Domain.Employees.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BaseArchitecture.Infrastructures.EF.Employees;
+namespace BaseArchitecture.Persistence.EF.Employees;
 
 public class EmployeeEntityMap : IEntityTypeConfiguration<Employee>
 {

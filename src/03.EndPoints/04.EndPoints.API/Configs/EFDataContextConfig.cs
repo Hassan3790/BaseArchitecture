@@ -1,4 +1,4 @@
-﻿using BaseArchitecture.Infrastructures.EF;
+﻿using BaseArchitecture.Persistence.EF;
 using Microsoft.EntityFrameworkCore;
 
 namespace _04.EndPoints.API.Configs;

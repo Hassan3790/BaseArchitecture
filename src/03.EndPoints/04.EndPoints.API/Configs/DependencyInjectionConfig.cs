@@ -1,6 +1,6 @@
 ﻿using BaseArchitecture.ApplicationServices.Employees;
 using BaseArchitecture.Domain.Employees.Data;
-using BaseArchitecture.Infrastructures.EF.Employees;
+using BaseArchitecture.Persistence.EF.Employees;
 
 namespace _04.EndPoints.API.Configs;
 

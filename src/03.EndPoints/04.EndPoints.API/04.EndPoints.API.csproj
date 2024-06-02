@@ -9,13 +9,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\01.Core\BaseArchitecture.ApplicationServices\BaseArchitecture.ApplicationServices.csproj" />
-      <ProjectReference Include="..\..\02.Infrastructures\BaseArchitecture.Infrastructures.EF\BaseArchitecture.Infrastructures.EF.csproj" />
+      <ProjectReference Include="..\..\02.Infrastructures\BaseArchitecture.Infrastructures.EF\BaseArchitecture.Persistence.EF.csproj" />
       <ProjectReference Include="..\..\02.Infrastructures\BaseArchitecture.Infrastructures.InternalMessaging\BaseArchitecture.Infrastructures.InternalMessaging.csproj" />
     </ItemGroup>
 
