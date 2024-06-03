@@ -3,7 +3,7 @@ using Hangfire.SqlServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace BaseArchitecture.Infrastructures.Hangfire
+namespace BaseArchitecture.Worker.Hangfire
 {
     class Runner
     {

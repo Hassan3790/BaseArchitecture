@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseArchitecture.Applicatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseArchitecture.Infrastructures.InternalMessaging", "src\02.Infrastructures\BaseArchitecture.Infrastructures.InternalMessaging\BaseArchitecture.Infrastructures.InternalMessaging.csproj", "{C39C875C-5864-4111-A2CA-90C083C32C48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseArchitecture.Infrastructures.Hangfire", "BaseArchitecture.Infrastructures.Hangfire\BaseArchitecture.Infrastructures.Hangfire.csproj", "{8727A5D4-49E8-4506-82EE-55526E61F765}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseArchitecture.Worker.Hangfire", "BaseArchitecture.Infrastructures.Hangfire\BaseArchitecture.Worker.Hangfire.csproj", "{8727A5D4-49E8-4506-82EE-55526E61F765}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
