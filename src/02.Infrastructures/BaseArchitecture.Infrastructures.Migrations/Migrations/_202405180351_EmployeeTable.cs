@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace test.Migrations;
+namespace BaseArchitecture.Infrastructures.Migrations.Migrations;
 
 [Migration(202405180351)]
 public class _202405180351_AddEmployeeTable : Migration
