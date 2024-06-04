@@ -7,11 +7,10 @@ namespace _04.EndPoints.API.Configs;
 
 public static class DependencyInjectionConfig
 {
-    public static WebApplicationBuilder RegisterRepository(
-        this WebApplicationBuilder builder)
+    public static ConfigureHostBuilder RegisterRepository(
+        this ConfigureHostBuilder hostBuilder)
     {
-        builder
-            .Host
+        hostBuilder
             .ConfigureContainer<ContainerBuilder>(containerBuilder =>
             {
                 containerBuilder.RegisterAssemblyTypes(typeof(EFEmployeeRepository).Assembly)
@@ -20,18 +19,18 @@ public static class DependencyInjectionConfig
                     .InstancePerLifetimeScope();
             });
 
-        return builder;
+        return hostBuilder;
     }
 
-    public static WebApplicationBuilder RegisterICommandHandler(this WebApplicationBuilder builder)
+    public static ConfigureHostBuilder RegisterICommandHandler(this ConfigureHostBuilder hostBuilder)
     {
-        builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+        hostBuilder.ConfigureContainer<ContainerBuilder>(containerBuilder =>
         {
             containerBuilder.RegisterAssemblyTypes(typeof(RegisterEmployeeHandler).Assembly)
                 .AsClosedTypesOf(typeof(ICommandHandler<>))
                 .InstancePerLifetimeScope();
         });
 
-        return builder;
+        return hostBuilder;
     }
 }

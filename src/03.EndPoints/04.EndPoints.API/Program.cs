@@ -20,8 +20,10 @@ builder
     .RegisterHangfire(connectionString!)
     .RegisterDbContext(connectionString!);
 
-builder.RegisterRepository();
-builder.RegisterICommandHandler();
+builder
+    .Host
+    .RegisterRepository()
+    .RegisterICommandHandler();
 
 var app = builder.Build();
 
@@ -35,6 +37,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseHangfire();
-
 
 app.Run();
