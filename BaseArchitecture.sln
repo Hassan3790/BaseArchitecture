@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseArchitecture.Persistenc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseArchitecture.Worker.Hangfire", "src\02.Infrastructures\BaseArchitecture.Worker.Hangfire\BaseArchitecture.Worker.Hangfire.csproj", "{07FF6E36-734E-43BB-8287-EDBF872CC9BC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseArchitecture.TestTools", "test\BaseArchitecture.TestTools\BaseArchitecture.TestTools.csproj", "{016B3CF4-643D-4539-A3A7-7FA36D351731}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{07FF6E36-734E-43BB-8287-EDBF872CC9BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07FF6E36-734E-43BB-8287-EDBF872CC9BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07FF6E36-734E-43BB-8287-EDBF872CC9BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{016B3CF4-643D-4539-A3A7-7FA36D351731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{016B3CF4-643D-4539-A3A7-7FA36D351731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{016B3CF4-643D-4539-A3A7-7FA36D351731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{016B3CF4-643D-4539-A3A7-7FA36D351731}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{C39C875C-5864-4111-A2CA-90C083C32C48} = {0599C2F9-B126-42F9-9404-5CF2F3B9D90B}
 		{32A8E22A-F6DE-431C-B672-6DDB5FC92208} = {0599C2F9-B126-42F9-9404-5CF2F3B9D90B}
 		{07FF6E36-734E-43BB-8287-EDBF872CC9BC} = {0599C2F9-B126-42F9-9404-5CF2F3B9D90B}
+		{016B3CF4-643D-4539-A3A7-7FA36D351731} = {C4ADDB0A-EDE0-418D-9670-90137F477825}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A48DFA3-F04D-4C61-A287-1C75CA01D5BD}
