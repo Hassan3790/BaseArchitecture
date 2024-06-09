@@ -7,7 +7,7 @@ using Framework.Domain.Exceptions;
 
 namespace BaseArchitecture.ApplicationServices.Employees;
 
-public class RegisterEmployeeHandler(
+public class RegisterEmployeeCommandHandler(
     EmployeeRepository employeeRepository)
     : ICommandHandler<RegisterEmployeeCommand>
 {

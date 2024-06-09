@@ -26,7 +26,7 @@ public static class DependencyInjectionConfig
     {
         hostBuilder.ConfigureContainer<ContainerBuilder>(containerBuilder =>
         {
-            containerBuilder.RegisterAssemblyTypes(typeof(RegisterEmployeeHandler).Assembly)
+            containerBuilder.RegisterAssemblyTypes(typeof(RegisterEmployeeCommandHandler).Assembly)
                 .AsClosedTypesOf(typeof(ICommandHandler<>))
                 .InstancePerLifetimeScope();
         });

@@ -10,12 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseArchitecture.Application.Tests.Employees
 {
-    public class RegisterEmployeeHandlerTests : TestConfig
+    public class RegisterEmployeeCommandHandlerTests : TestConfig
     {
         private readonly ICommandHandler<RegisterEmployeeCommand> sut;
         private readonly EmployeeRepository employeeRepository;
 
-        public RegisterEmployeeHandlerTests()
+        public RegisterEmployeeCommandHandlerTests()
         {
             sut = Setup<ICommandHandler<RegisterEmployeeCommand>>();
             employeeRepository = Setup<EmployeeRepository>();
