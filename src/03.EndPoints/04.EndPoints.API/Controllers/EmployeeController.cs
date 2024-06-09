@@ -15,4 +15,12 @@ public class EmployeeController : ControllerBase
     {
         await handler.Handle(command);
     }
+
+    [HttpPatch("phone-number")]
+    public async Task ChangePhoneNumber(
+        [FromServices] ICommandHandler<ChangeEmployeePhoneNumberCommand> handler,
+        ChangeEmployeePhoneNumberCommand command)
+    {
+        await handler.Handle(command);
+    }
 }
