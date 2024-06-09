@@ -24,7 +24,6 @@ public class RegisterEmployeeHandler(
         await employeeRepository.Add(employee);
     }
     
-
     private async Task PreventAddWhenNationalCodeIsDuplicate(
         RegisterEmployeeCommand command)
     {

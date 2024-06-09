@@ -15,7 +15,6 @@ public class EFEmployeeRepository(
     {
         context.Add(employee);
         await context.SaveChangesAsync();
-        RaiseEvent(employee);
     }
 
     public async Task<bool> IsExistNationalCode(NationalCode nationalCode)
