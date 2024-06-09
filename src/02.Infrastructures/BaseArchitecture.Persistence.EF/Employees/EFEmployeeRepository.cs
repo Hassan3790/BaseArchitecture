@@ -17,6 +17,18 @@ public class EFEmployeeRepository(
         await context.SaveChangesAsync();
     }
 
+    public async Task Update(Employee employee)
+    {
+        await context.SaveChangesAsync();
+    }
+
+    public async Task<Employee?> Find(EmployeeId employeeId)
+    {
+        return await context
+            .Set<Employee>()
+            .SingleOrDefaultAsync(e => e.Id == employeeId);
+    }
+
     public async Task<bool> IsExistNationalCode(NationalCode nationalCode)
     {
         return await context

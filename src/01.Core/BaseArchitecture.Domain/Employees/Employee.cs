@@ -28,4 +28,9 @@ public class Employee : AggregateRoot
     private Employee()
     {
     }
+
+    public void ChangePhoneNumber(PhoneNumber phoneNumber)
+    {
+        PhoneNumber = phoneNumber;
+    }
 }

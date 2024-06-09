@@ -10,9 +10,11 @@ using Framework.Domain.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Xunit;
 
 namespace BaseArchitecture.TestTools.Configurations
 {
+    [Collection("SequentialTests")]
     public class TestConfig : IDisposable
     {
         private readonly IContainer container;
