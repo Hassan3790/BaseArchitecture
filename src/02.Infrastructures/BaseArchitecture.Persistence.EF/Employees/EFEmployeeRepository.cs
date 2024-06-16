@@ -15,6 +15,7 @@ public class EFEmployeeRepository(
     {
         context.Add(employee);
         await context.SaveChangesAsync();
+        RaiseEvent(employee);
     }
 
     public async Task Update(Employee employee)
@@ -38,9 +39,6 @@ public class EFEmployeeRepository(
 
     public void RaiseEvent(AggregateRoot entity)
     {
-        if (context.Database.CurrentTransaction is null)
-        {
-            messageDispatcher.Publish(entity.Events);
-        }
+        messageDispatcher.Publish(entity.Events);
     }
 }
