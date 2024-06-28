@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseArchitecture.Persistence.EF.Employees;
 
-public class EFEmployeeRepository(
+public class EfEmployeeWriteRepository(
     EFDataContext context,
-    IMessageDispatcher messageDispatcher) : EmployeeRepository
+    IMessageDispatcher messageDispatcher) : IEmployeeWriteRepository
 {
     public async Task Add(Employee employee)
     {

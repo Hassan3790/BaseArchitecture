@@ -13,12 +13,12 @@ namespace BaseArchitecture.Application.Tests.Employees
     public class RegisterEmployeeCommandHandlerTests : TestConfig
     {
         private readonly ICommandHandler<RegisterEmployeeCommand> sut;
-        private readonly EmployeeRepository employeeRepository;
+        private readonly IEmployeeWriteRepository _employeeWriteRepository;
 
         public RegisterEmployeeCommandHandlerTests()
         {
             sut = Setup<ICommandHandler<RegisterEmployeeCommand>>();
-            employeeRepository = Setup<EmployeeRepository>();
+            _employeeWriteRepository = Setup<IEmployeeWriteRepository>();
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace BaseArchitecture.Application.Tests.Employees
                 new FullName("hassan", "ahmadi"),
                 new NationalCode("1234567890"),
                 new PhoneNumber("09123456789"));
-            await employeeRepository.Add(employee);
+            await _employeeWriteRepository.Add(employee);
             var command = new RegisterEmployeeCommand
             {
                 FirstName = "hassan",

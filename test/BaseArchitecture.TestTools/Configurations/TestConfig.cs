@@ -60,8 +60,13 @@ namespace BaseArchitecture.TestTools.Configurations
 
         private void RegisterDependencies(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(EFEmployeeRepository).Assembly)
-                .As(typeof(Repository))
+            builder.RegisterAssemblyTypes(typeof(EfEmployeeWriteRepository).Assembly)
+                .As(typeof(WriteRepository))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(EfEmployeeReadRepository).Assembly)
+                .As(typeof(ReadRepository))
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 

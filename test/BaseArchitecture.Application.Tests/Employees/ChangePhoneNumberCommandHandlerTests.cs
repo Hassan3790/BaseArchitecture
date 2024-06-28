@@ -13,12 +13,12 @@ namespace BaseArchitecture.Application.Tests.Employees
     public class ChangePhoneNumberCommandHandlerTests : TestConfig
     {
         private readonly ICommandHandler<ChangeEmployeePhoneNumberCommand> sut;
-        private readonly EmployeeRepository employeeRepository;
+        private readonly IEmployeeWriteRepository _employeeWriteRepository;
 
         public ChangePhoneNumberCommandHandlerTests()
         {
             sut = Setup<ICommandHandler<ChangeEmployeePhoneNumberCommand>>();
-            employeeRepository = Setup<EmployeeRepository>();
+            _employeeWriteRepository = Setup<IEmployeeWriteRepository>();
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace BaseArchitecture.Application.Tests.Employees
                 new FullName("Hassan", "ahmadi"),
                 new NationalCode("1234567890"),
                 new PhoneNumber("0913214567"));
-            await employeeRepository.Add(employee);
+            await _employeeWriteRepository.Add(employee);
             var command = new ChangeEmployeePhoneNumberCommand
             {
                 EmployeeId = employee.Id.Value,

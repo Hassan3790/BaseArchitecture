@@ -8,7 +8,7 @@ using Framework.Domain.Exceptions;
 namespace BaseArchitecture.ApplicationServices.Employees;
 
 public class RegisterEmployeeCommandHandler(
-    EmployeeRepository employeeRepository)
+    IEmployeeWriteRepository employeeWriteRepository)
     : ICommandHandler<RegisterEmployeeCommand>
 {
     public async Task Handle(RegisterEmployeeCommand command)
@@ -21,13 +21,13 @@ public class RegisterEmployeeCommandHandler(
             new NationalCode(command.NationalCode),
             new PhoneNumber(command.PhoneNumber));
 
-        await employeeRepository.Add(employee);
+        await employeeWriteRepository.Add(employee);
     }
     
     private async Task PreventAddWhenNationalCodeIsDuplicate(
         RegisterEmployeeCommand command)
     {
-        var isExist = await employeeRepository
+        var isExist = await employeeWriteRepository
             .IsExistNationalCode(new NationalCode(command.NationalCode));
         if (isExist)
         {

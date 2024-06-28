@@ -1,4 +1,6 @@
 ﻿using BaseArchitecture.ApplicationServices.Employees.Commands;
+using BaseArchitecture.Domain.Employees.Data;
+using BaseArchitecture.Domain.Employees.ViewModels;
 using Framework.Domain;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,5 +24,12 @@ public class EmployeeController : ControllerBase
         ChangeEmployeePhoneNumberCommand command)
     {
         await handler.Handle(command);
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<GetAllEmployeeViewModel>> GetAll(
+        [FromServices] EmployeeReadRepository employeeReadRepository)
+    {
+        return await employeeReadRepository.GetAllEmployees();
     }
 }

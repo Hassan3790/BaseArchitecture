@@ -13,8 +13,17 @@ public static class DependencyInjectionConfig
         hostBuilder
             .ConfigureContainer<ContainerBuilder>(containerBuilder =>
             {
-                containerBuilder.RegisterAssemblyTypes(typeof(EFEmployeeRepository).Assembly)
-                    .As(typeof(Repository))
+                containerBuilder.RegisterAssemblyTypes(typeof(EfEmployeeWriteRepository).Assembly)
+                    .As(typeof(WriteRepository))
+                    .AsImplementedInterfaces()
+                    .InstancePerLifetimeScope();
+            });
+
+        hostBuilder
+            .ConfigureContainer<ContainerBuilder>(containerBuilder =>
+            {
+                containerBuilder.RegisterAssemblyTypes(typeof(EfEmployeeReadRepository).Assembly)
+                    .As(typeof(ReadRepository))
                     .AsImplementedInterfaces()
                     .InstancePerLifetimeScope();
             });

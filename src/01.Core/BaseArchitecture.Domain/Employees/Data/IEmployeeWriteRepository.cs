@@ -3,7 +3,7 @@ using Framework.Domain;
 
 namespace BaseArchitecture.Domain.Employees.Data;
 
-public interface EmployeeRepository : Repository
+public interface IEmployeeWriteRepository : WriteRepository
 {
     Task Add(Employee employee);
     Task Update(Employee employee);
