@@ -7,7 +7,7 @@ using Framework.Domain.Exceptions;
 
 namespace BaseArchitecture.ApplicationServices.Employees
 {
-    public class ChangePhoneNumberCommandHandler(IEmployeeWriteRepository employeeWriteRepository) : ICommandHandler<ChangeEmployeePhoneNumberCommand>
+    public class ChangePhoneNumberCommandHandler(EmployeeWriteRepository employeeWriteRepository) : ICommandHandler<ChangeEmployeePhoneNumberCommand>
     {
         public async Task Handle(ChangeEmployeePhoneNumberCommand command)
         {

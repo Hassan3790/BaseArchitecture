@@ -13,12 +13,14 @@ namespace BaseArchitecture.Application.Tests.Employees
     public class RegisterEmployeeCommandHandlerTests : TestConfig
     {
         private readonly ICommandHandler<RegisterEmployeeCommand> sut;
-        private readonly IEmployeeWriteRepository _employeeWriteRepository;
+        private readonly EmployeeWriteRepository employeeWriteRepository;
+        private readonly EmployeeReadRepository employeeReadRepository;
 
         public RegisterEmployeeCommandHandlerTests()
         {
             sut = Setup<ICommandHandler<RegisterEmployeeCommand>>();
-            _employeeWriteRepository = Setup<IEmployeeWriteRepository>();
+            employeeWriteRepository = Setup<EmployeeWriteRepository>();
+            employeeReadRepository = Setup<EmployeeReadRepository>();
         }
 
         [Fact]
@@ -34,14 +36,14 @@ namespace BaseArchitecture.Application.Tests.Employees
 
             await sut.Handle(command);
 
-            var actualResult = await readDataContext
-                .Set<Employee>()
-                .SingleOrDefaultAsync();
+            var result = await employeeReadRepository
+                .GetAllEmployees();
+            var actualResult = result.FirstOrDefault();
             actualResult.Should().NotBeNull();
-            actualResult!.FullName.FirstName.Should().Be(command.FirstName);
-            actualResult.FullName.LastName.Should().Be(command.LastName);
-            actualResult.NationalCode.Value.Should().Be(command.NationalCode);
-            actualResult.PhoneNumber.Value.Should().Be(command.PhoneNumber);
+            actualResult!.FirstName.Should().Be(command.FirstName);
+            actualResult.LastName.Should().Be(command.LastName);
+            actualResult.NationalCode.Should().Be(command.NationalCode);
+            actualResult.PhoneNumber.Should().Be(command.PhoneNumber);
         }
 
         [Fact]
@@ -52,7 +54,7 @@ namespace BaseArchitecture.Application.Tests.Employees
                 new FullName("hassan", "ahmadi"),
                 new NationalCode("1234567890"),
                 new PhoneNumber("09123456789"));
-            await _employeeWriteRepository.Add(employee);
+            await employeeWriteRepository.Add(employee);
             var command = new RegisterEmployeeCommand
             {
                 FirstName = "hassan",

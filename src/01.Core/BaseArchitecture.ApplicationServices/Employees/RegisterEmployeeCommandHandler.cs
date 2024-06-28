@@ -8,7 +8,7 @@ using Framework.Domain.Exceptions;
 namespace BaseArchitecture.ApplicationServices.Employees;
 
 public class RegisterEmployeeCommandHandler(
-    IEmployeeWriteRepository employeeWriteRepository)
+    EmployeeWriteRepository employeeWriteRepository)
     : ICommandHandler<RegisterEmployeeCommand>
 {
     public async Task Handle(RegisterEmployeeCommand command)
@@ -28,7 +28,7 @@ public class RegisterEmployeeCommandHandler(
         RegisterEmployeeCommand command)
     {
         var isExist = await employeeWriteRepository
-            .IsExistNationalCode(new NationalCode(command.NationalCode));
+            .ExistNationalCode(new NationalCode(command.NationalCode));
         if (isExist)
         {
             throw new DomainException("duplicate national code");
