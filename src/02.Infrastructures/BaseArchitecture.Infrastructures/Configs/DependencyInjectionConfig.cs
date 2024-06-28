@@ -3,7 +3,6 @@ using BaseArchitecture.ApplicationServices.Employees;
 using BaseArchitecture.Persistence.EF.Employees;
 using Framework.Domain;
 using Framework.Domain.Events;
-using Microsoft.AspNetCore.Builder;
 
 namespace BaseArchitecture.Infrastructures.Configs;
 

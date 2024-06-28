@@ -1,8 +1,7 @@
-using _04.EndPoints.API;
+using _04.EndPoints.API.Configs;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BaseArchitecture.Infrastructures.Configs;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 

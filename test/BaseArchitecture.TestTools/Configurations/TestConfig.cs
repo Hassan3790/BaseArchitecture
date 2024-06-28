@@ -8,7 +8,6 @@ using Framework.Domain;
 using Framework.Domain.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using BaseArchitecture.Infrastructures.Jobs;
 using Xunit;
 

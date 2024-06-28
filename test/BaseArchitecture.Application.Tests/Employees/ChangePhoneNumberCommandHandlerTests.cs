@@ -6,7 +6,6 @@ using BaseArchitecture.TestTools.Configurations;
 using FluentAssertions;
 using Framework.Domain;
 using Framework.Domain.Exceptions;
-using Microsoft.EntityFrameworkCore;
 
 namespace BaseArchitecture.Application.Tests.Employees
 {

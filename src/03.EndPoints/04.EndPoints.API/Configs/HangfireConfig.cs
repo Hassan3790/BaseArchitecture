@@ -3,7 +3,7 @@ using Hangfire;
 using Hangfire.SqlServer;
 using Newtonsoft.Json;
 
-namespace _04.EndPoints.API
+namespace _04.EndPoints.API.Configs
 {
     public static class HangfireConfig
     {

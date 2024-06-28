@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Framework.Domain.Events;
 using Hangfire;
-using Hangfire.States;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BaseArchitecture.Infrastructures.Jobs
