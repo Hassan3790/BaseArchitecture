@@ -1,7 +1,11 @@
-﻿using Hangfire;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using BaseArchitecture.Infrastructures.Configs;
+using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace BaseArchitecture.Worker.Hangfire
 {
@@ -27,9 +31,20 @@ namespace BaseArchitecture.Worker.Hangfire
             var connectionString = Configuration.GetValue<string>("connectionString");
 
             return Host.CreateDefaultBuilder(args)
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureContainer<ContainerBuilder>(containerBuilder =>
+                {
+                    containerBuilder
+                        .RegisterRepository()
+                        .RegisterICommandHandler()
+                        .RegisterMessageHandler();
+                })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHangfire(configuration => configuration
+                    services
+                        .RegisterMessageDispatcher()
+                        .RegisterDbContext(connectionString!)
+                        .AddHangfire(configuration => configuration
                         .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                         .UseSimpleAssemblyNameTypeSerializer()
                         .UseRecommendedSerializerSettings()
@@ -42,7 +57,12 @@ namespace BaseArchitecture.Worker.Hangfire
                                 QueuePollInterval = TimeSpan.Zero,
                                 UseRecommendedIsolationLevel = true,
                                 DisableGlobalLocks = true
-                            }));
+                            })
+                        .UseSerializerSettings(new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.All,
+                            SerializationBinder = new CustomSerializationBinder()
+                        }));
 
                     services.AddHangfireServer();
                 });

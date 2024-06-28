@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BaseArchitecture.Infrastructures.Migrations
+namespace BaseArchitecture.Migrations
 {
     class Program
     {

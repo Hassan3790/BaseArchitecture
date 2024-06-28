@@ -15,10 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\01.Core\BaseArchitecture.ApplicationServices\BaseArchitecture.ApplicationServices.csproj" />
-    <ProjectReference Include="..\..\src\01.Core\BaseArchitecture.Domain\BaseArchitecture.Domain.csproj" />
-    <ProjectReference Include="..\..\src\02.Infrastructures\BaseArchitecture.Infrastructures.InternalMessaging\BaseArchitecture.Infrastructures.InternalMessaging.csproj" />
-    <ProjectReference Include="..\..\src\02.Infrastructures\BaseArchitecture.Persistence.EF\BaseArchitecture.Persistence.EF.csproj" />
+    <ProjectReference Include="..\..\src\02.Infrastructures\BaseArchitecture.Infrastructures\BaseArchitecture.Infrastructures.csproj" />
   </ItemGroup>
 
   <ItemGroup>

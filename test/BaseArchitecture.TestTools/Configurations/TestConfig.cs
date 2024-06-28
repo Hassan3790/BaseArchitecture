@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BaseArchitecture.ApplicationServices.Employees;
-using BaseArchitecture.Infrastructures.InternalMessaging;
 using BaseArchitecture.Persistence.EF;
 using BaseArchitecture.Persistence.EF.Employees;
 using BaseArchitecture.TestTools.Configurations.Tools;
@@ -10,6 +9,7 @@ using Framework.Domain.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using BaseArchitecture.Infrastructures.Jobs;
 using Xunit;
 
 namespace BaseArchitecture.TestTools.Configurations
@@ -60,8 +60,13 @@ namespace BaseArchitecture.TestTools.Configurations
 
         private void RegisterDependencies(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(EFEmployeeRepository).Assembly)
-                .As(typeof(Repository))
+            builder.RegisterAssemblyTypes(typeof(EfEmployeeWriteRepository).Assembly)
+                .As(typeof(WriteRepository))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(EfEmployeeReadRepository).Assembly)
+                .As(typeof(ReadRepository))
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
@@ -83,11 +88,7 @@ namespace BaseArchitecture.TestTools.Configurations
             builder.Register<MessageDispatcher>(c =>
                 {
                     var serviceProvider = c.Resolve<IServiceProvider>();
-                    return new MessageDispatcher(
-                        serviceProvider,
-                        typeof(IHandleMessage<>),
-                        "Handle",
-                        Assembly.Load("BaseArchitecture.ApplicationServices"));
+                    return new MessageDispatcher(serviceProvider);
                 })
                 .As<IMessageDispatcher>()
                 .SingleInstance();

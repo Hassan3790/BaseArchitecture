@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseArchitecture.Persistence.EF.Employees;
 
-public class EFEmployeeRepository(
+public class EfEmployeeWriteRepository(
     EFDataContext context,
-    IMessageDispatcher messageDispatcher) : EmployeeRepository
+    IMessageDispatcher messageDispatcher) : EmployeeWriteRepository
 {
     public async Task Add(Employee employee)
     {
@@ -27,10 +27,10 @@ public class EFEmployeeRepository(
     {
         return await context
             .Set<Employee>()
-            .SingleOrDefaultAsync(e => e.Id == employeeId);
+            .FirstOrDefaultAsync(e => e.Id == employeeId);
     }
 
-    public async Task<bool> IsExistNationalCode(NationalCode nationalCode)
+    public async Task<bool> ExistNationalCode(NationalCode nationalCode)
     {
         return await context
             .Set<Employee>()
