@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BaseArchitecture.ApplicationServices.Employees;
-using BaseArchitecture.Infrastructures.InternalMessaging;
 using BaseArchitecture.Persistence.EF;
 using BaseArchitecture.Persistence.EF.Employees;
 using BaseArchitecture.TestTools.Configurations.Tools;

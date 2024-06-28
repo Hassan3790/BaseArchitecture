@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BaseArchitecture.Domain.Employees.ViewModels
+﻿namespace BaseArchitecture.Domain.Employees.ViewModels
 {
     public class GetAllEmployeeViewModel
     {

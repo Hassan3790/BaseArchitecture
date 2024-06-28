@@ -1,7 +1,9 @@
-﻿using Hangfire;
+﻿using BaseArchitecture.Infrastructures.Jobs;
+using Hangfire;
 using Hangfire.SqlServer;
+using Newtonsoft.Json;
 
-namespace _04.EndPoints.API.Configs
+namespace _04.EndPoints.API
 {
     public static class HangfireConfig
     {
@@ -21,6 +23,11 @@ namespace _04.EndPoints.API.Configs
                     QueuePollInterval = TimeSpan.Zero,
                     UseRecommendedIsolationLevel = true,
                     DisableGlobalLocks = true
+                })
+                .UseSerializerSettings(new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All,
+                    SerializationBinder = new CustomSerializationBinder()
                 }));
 
             return services;

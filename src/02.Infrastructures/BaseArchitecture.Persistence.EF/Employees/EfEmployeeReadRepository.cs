@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BaseArchitecture.Domain.Employees;
+﻿using BaseArchitecture.Domain.Employees;
 using BaseArchitecture.Domain.Employees.Data;
 using BaseArchitecture.Domain.Employees.ViewModels;
-using Framework.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseArchitecture.Persistence.EF.Employees

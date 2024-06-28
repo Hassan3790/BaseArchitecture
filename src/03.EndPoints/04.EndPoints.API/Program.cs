@@ -1,5 +1,8 @@
-using _04.EndPoints.API.Configs;
+using _04.EndPoints.API;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using BaseArchitecture.Infrastructures.Configs;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +25,13 @@ builder
 
 builder
     .Host
-    .RegisterRepository()
-    .RegisterICommandHandler();
+    .ConfigureContainer<ContainerBuilder>(containerBuilder =>
+    {
+        containerBuilder
+            .RegisterRepository()
+            .RegisterICommandHandler()
+            .RegisterMessageHandler();
+    });
 
 var app = builder.Build();
 

@@ -1,7 +1,8 @@
 ﻿using BaseArchitecture.Persistence.EF;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace _04.EndPoints.API.Configs;
+namespace BaseArchitecture.Infrastructures.Configs;
 
 public static class EFDataContextConfig
 {
