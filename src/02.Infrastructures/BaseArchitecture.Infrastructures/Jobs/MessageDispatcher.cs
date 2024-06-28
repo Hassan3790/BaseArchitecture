@@ -4,7 +4,6 @@ using Framework.Domain.Events;
 using Hangfire;
 using Hangfire.States;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace BaseArchitecture.Infrastructures.Jobs
 {

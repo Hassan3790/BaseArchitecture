@@ -9,6 +9,7 @@ using Framework.Domain.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using BaseArchitecture.Infrastructures.Jobs;
 using Xunit;
 
 namespace BaseArchitecture.TestTools.Configurations
@@ -87,11 +88,7 @@ namespace BaseArchitecture.TestTools.Configurations
             builder.Register<MessageDispatcher>(c =>
                 {
                     var serviceProvider = c.Resolve<IServiceProvider>();
-                    return new MessageDispatcher(
-                        serviceProvider,
-                        typeof(IHandleMessage<>),
-                        "Handle",
-                        Assembly.Load("BaseArchitecture.ApplicationServices"));
+                    return new MessageDispatcher(serviceProvider);
                 })
                 .As<IMessageDispatcher>()
                 .SingleInstance();
