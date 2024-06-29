@@ -2,7 +2,7 @@
 
 namespace BaseArchitecture.Persistence.EF
 {
-    public class EfUnitOfWork(EFDataContext context) : UnitOfWork
+    public class EfUnitOfWork(ApplicationDbContext context) : UnitOfWork
     {
         public async Task Complete()
         {

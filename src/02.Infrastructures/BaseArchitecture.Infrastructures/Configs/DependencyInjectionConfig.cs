@@ -4,6 +4,8 @@ using BaseArchitecture.Persistence.EF;
 using BaseArchitecture.Persistence.EF.Employees;
 using Framework.Domain;
 using Framework.Domain.Events;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BaseArchitecture.Infrastructures.Configs;
 
@@ -55,5 +57,17 @@ public static class DependencyInjectionConfig
             .InstancePerLifetimeScope();
 
         return containerBuilder;
+    }
+
+    public static IServiceCollection RegisterDbContext(
+        this IServiceCollection services,
+        string connectionString)
+    {
+        services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            options.UseSqlServer(connectionString);
+        });
+
+        return services;
     }
 }

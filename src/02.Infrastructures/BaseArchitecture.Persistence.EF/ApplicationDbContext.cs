@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BaseArchitecture.Persistence.EF;
 
-public class EFDataContext(DbContextOptions<EFDataContext> options) :
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
     DbContext(options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)

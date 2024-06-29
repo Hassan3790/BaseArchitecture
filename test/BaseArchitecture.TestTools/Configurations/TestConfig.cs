@@ -17,8 +17,8 @@ namespace BaseArchitecture.TestTools.Configurations
     public class TestConfig : IDisposable
     {
         private readonly IContainer container;
-        protected readonly EFDataContext writeDataContext;
-        protected readonly EFDataContext readDataContext;
+        protected readonly ApplicationDbContext writeDataContext;
+        protected readonly ApplicationDbContext readDataContext;
         private readonly string connectionString;
 
         public TestConfig()
@@ -34,8 +34,8 @@ namespace BaseArchitecture.TestTools.Configurations
 
             container = builder.Build();
 
-            writeDataContext = container.Resolve<EFDataContext>();
-            readDataContext = container.Resolve<EFDataContext>();
+            writeDataContext = container.Resolve<ApplicationDbContext>();
+            readDataContext = container.Resolve<ApplicationDbContext>();
         }
 
         protected T Setup<T>()
@@ -45,7 +45,7 @@ namespace BaseArchitecture.TestTools.Configurations
 
         public void Dispose()
         {
-            using (var context = new EFDataContext(new DbContextOptionsBuilder<EFDataContext>()
+            using (var context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                        .UseSqlServer(connectionString).Options))
             {
                 context.Database.ExecuteSqlRaw(@"
@@ -80,10 +80,10 @@ namespace BaseArchitecture.TestTools.Configurations
 
             builder.Register(c =>
                 {
-                    var options = new DbContextOptionsBuilder<EFDataContext>()
+                    var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                         .UseSqlServer(connectionString)
                         .Options;
-                    return new EFDataContext(options);
+                    return new ApplicationDbContext(options);
                 })
                 .AsSelf()
                 .InstancePerLifetimeScope();

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseArchitecture.Persistence.EF.Employees
 {
-    public class EfEmployeeReadRepository(EFDataContext context) : EmployeeReadRepository
+    public class EfEmployeeReadRepository(ApplicationDbContext context) : EmployeeReadRepository
     {
         public async Task<IEnumerable<GetAllEmployeeViewModel>> GetAllEmployees()
         {
