@@ -14,13 +14,7 @@ public class EfEmployeeWriteRepository(
     public async Task Add(Employee employee)
     {
         context.Add(employee);
-        await context.SaveChangesAsync();
         RaiseEvent(employee);
-    }
-
-    public async Task Update(Employee employee)
-    {
-        await context.SaveChangesAsync();
     }
 
     public async Task<Employee?> Find(EmployeeId employeeId)

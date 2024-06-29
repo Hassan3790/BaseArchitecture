@@ -8,7 +8,8 @@ using Framework.Domain.Exceptions;
 namespace BaseArchitecture.ApplicationServices.Employees;
 
 public class RegisterEmployeeCommandHandler(
-    EmployeeWriteRepository employeeWriteRepository)
+    EmployeeWriteRepository employeeWriteRepository,
+    UnitOfWork unitOfWork)
     : ICommandHandler<RegisterEmployeeCommand>
 {
     public async Task Handle(RegisterEmployeeCommand command)
@@ -22,8 +23,9 @@ public class RegisterEmployeeCommandHandler(
             new PhoneNumber(command.PhoneNumber));
 
         await employeeWriteRepository.Add(employee);
+        await unitOfWork.Complete();
     }
-    
+
     private async Task PreventAddWhenNationalCodeIsDuplicate(
         RegisterEmployeeCommand command)
     {

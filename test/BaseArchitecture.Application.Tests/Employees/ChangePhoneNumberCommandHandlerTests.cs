@@ -13,11 +13,13 @@ namespace BaseArchitecture.Application.Tests.Employees
     {
         private readonly ICommandHandler<ChangeEmployeePhoneNumberCommand> sut;
         private readonly EmployeeWriteRepository employeeWriteRepository;
+        private readonly UnitOfWork unitOfWork;
 
         public ChangePhoneNumberCommandHandlerTests()
         {
             sut = Setup<ICommandHandler<ChangeEmployeePhoneNumberCommand>>();
             employeeWriteRepository = Setup<EmployeeWriteRepository>();
+            unitOfWork = Setup<UnitOfWork>();
         }
 
         [Fact]
@@ -29,6 +31,7 @@ namespace BaseArchitecture.Application.Tests.Employees
                 new NationalCode("1234567890"),
                 new PhoneNumber("0913214567"));
             await employeeWriteRepository.Add(employee);
+            await unitOfWork.Complete();
             var command = new ChangeEmployeePhoneNumberCommand
             {
                 EmployeeId = employee.Id.Value,

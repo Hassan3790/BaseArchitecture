@@ -7,7 +7,9 @@ using Framework.Domain.Exceptions;
 
 namespace BaseArchitecture.ApplicationServices.Employees
 {
-    public class ChangePhoneNumberCommandHandler(EmployeeWriteRepository employeeWriteRepository) : ICommandHandler<ChangeEmployeePhoneNumberCommand>
+    public class ChangePhoneNumberCommandHandler(
+        EmployeeWriteRepository employeeWriteRepository,
+        UnitOfWork unitOfWork) : ICommandHandler<ChangeEmployeePhoneNumberCommand>
     {
         public async Task Handle(ChangeEmployeePhoneNumberCommand command)
         {
@@ -19,7 +21,7 @@ namespace BaseArchitecture.ApplicationServices.Employees
             employee!
                 .ChangePhoneNumber(new PhoneNumber(command.PhoneNumber));
 
-            await employeeWriteRepository.Update(employee);
+            await unitOfWork.Complete();
         }
 
         private static void PreventChangePhoneNumberWhenEmployeeNotFound(Employee? employee)

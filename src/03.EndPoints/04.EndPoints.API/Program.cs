@@ -28,6 +28,7 @@ builder
     {
         containerBuilder
             .RegisterRepository()
+            .RegisterUnitOfWork()
             .RegisterICommandHandler()
             .RegisterMessageHandler();
     });

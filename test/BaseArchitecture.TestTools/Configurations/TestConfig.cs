@@ -69,6 +69,11 @@ namespace BaseArchitecture.TestTools.Configurations
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
+            builder.RegisterType(typeof(EfUnitOfWork))
+                .As(typeof(UnitOfWork))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
             builder.RegisterAssemblyTypes(typeof(RegisterEmployeeCommandHandler).Assembly)
                 .AsClosedTypesOf(typeof(ICommandHandler<>))
                 .InstancePerLifetimeScope();

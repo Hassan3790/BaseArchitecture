@@ -14,12 +14,14 @@ namespace BaseArchitecture.Application.Tests.Employees
         private readonly ICommandHandler<RegisterEmployeeCommand> sut;
         private readonly EmployeeWriteRepository employeeWriteRepository;
         private readonly EmployeeReadRepository employeeReadRepository;
+        private readonly UnitOfWork unitOfWork;
 
         public RegisterEmployeeCommandHandlerTests()
         {
             sut = Setup<ICommandHandler<RegisterEmployeeCommand>>();
             employeeWriteRepository = Setup<EmployeeWriteRepository>();
             employeeReadRepository = Setup<EmployeeReadRepository>();
+            unitOfWork = Setup<UnitOfWork>();
         }
 
         [Fact]
@@ -54,6 +56,7 @@ namespace BaseArchitecture.Application.Tests.Employees
                 new NationalCode("1234567890"),
                 new PhoneNumber("09123456789"));
             await employeeWriteRepository.Add(employee);
+            await unitOfWork.Complete();
             var command = new RegisterEmployeeCommand
             {
                 FirstName = "hassan",

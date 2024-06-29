@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using BaseArchitecture.ApplicationServices.Employees;
+using BaseArchitecture.Persistence.EF;
 using BaseArchitecture.Persistence.EF.Employees;
 using Framework.Domain;
 using Framework.Domain.Events;
@@ -21,6 +22,17 @@ public static class DependencyInjectionConfig
                     .As(typeof(ReadRepository))
                     .AsImplementedInterfaces()
                     .InstancePerLifetimeScope();
+
+        return containerBuilder;
+    }
+
+    public static ContainerBuilder RegisterUnitOfWork(this ContainerBuilder containerBuilder)
+    {
+
+        containerBuilder.RegisterType(typeof(EfUnitOfWork))
+            .As(typeof(UnitOfWork))
+            .AsImplementedInterfaces()
+            .InstancePerLifetimeScope();
 
         return containerBuilder;
     }

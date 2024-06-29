@@ -36,6 +36,7 @@ namespace BaseArchitecture.Worker.Hangfire
                 {
                     containerBuilder
                         .RegisterRepository()
+                        .RegisterUnitOfWork()
                         .RegisterICommandHandler()
                         .RegisterMessageHandler();
                 })
