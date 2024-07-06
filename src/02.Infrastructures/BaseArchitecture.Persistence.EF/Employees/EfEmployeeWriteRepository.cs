@@ -9,7 +9,7 @@ namespace BaseArchitecture.Persistence.EF.Employees;
 
 public class EfEmployeeWriteRepository(
     ApplicationDbContext context,
-    IMessageDispatcher messageDispatcher) : EmployeeWriteRepository
+    IOutboxManagement outboxManagement) : EmployeeWriteRepository
 {
     public async Task Add(Employee employee)
     {
@@ -33,6 +33,6 @@ public class EfEmployeeWriteRepository(
 
     public void RaiseEvent(AggregateRoot entity)
     {
-        messageDispatcher.Publish(entity.Events);
+        outboxManagement.Add(entity);
     }
 }

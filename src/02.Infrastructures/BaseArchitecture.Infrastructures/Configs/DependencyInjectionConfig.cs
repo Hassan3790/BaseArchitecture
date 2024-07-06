@@ -2,6 +2,7 @@
 using BaseArchitecture.ApplicationServices.Employees;
 using BaseArchitecture.Persistence.EF;
 using BaseArchitecture.Persistence.EF.Employees;
+using BaseArchitecture.Persistence.EF.OutboxMessages;
 using Framework.Domain;
 using Framework.Domain.Events;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,6 @@ public static class DependencyInjectionConfig
     public static ContainerBuilder RegisterRepository(
         this ContainerBuilder containerBuilder)
     {
-
         containerBuilder.RegisterAssemblyTypes(typeof(EfEmployeeWriteRepository).Assembly)
                     .As(typeof(WriteRepository))
                     .AsImplementedInterfaces()
@@ -30,7 +30,6 @@ public static class DependencyInjectionConfig
 
     public static ContainerBuilder RegisterUnitOfWork(this ContainerBuilder containerBuilder)
     {
-
         containerBuilder.RegisterType(typeof(EfUnitOfWork))
             .As(typeof(UnitOfWork))
             .AsImplementedInterfaces()
@@ -41,7 +40,6 @@ public static class DependencyInjectionConfig
 
     public static ContainerBuilder RegisterICommandHandler(this ContainerBuilder containerBuilder)
     {
-
         containerBuilder.RegisterAssemblyTypes(typeof(RegisterEmployeeCommandHandler).Assembly)
             .AsClosedTypesOf(typeof(ICommandHandler<>))
             .InstancePerLifetimeScope();
@@ -51,9 +49,18 @@ public static class DependencyInjectionConfig
 
     public static ContainerBuilder RegisterMessageHandler(this ContainerBuilder containerBuilder)
     {
-
         containerBuilder.RegisterAssemblyTypes(typeof(RegisterEmployeeCommandHandler).Assembly)
             .AsClosedTypesOf(typeof(IHandleMessage<>))
+            .InstancePerLifetimeScope();
+
+        return containerBuilder;
+    }
+
+    public static ContainerBuilder RegisterOutboxManagement(this ContainerBuilder containerBuilder)
+    {
+        containerBuilder.RegisterType(typeof(OutboxManagement))
+            .As(typeof(IOutboxManagement))
+            .AsImplementedInterfaces()
             .InstancePerLifetimeScope();
 
         return containerBuilder;

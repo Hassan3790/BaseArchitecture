@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BaseArchitecture.Persistence.EF.Employees;
 
-public class EmployeeEntityMap : IEntityTypeConfiguration<Employee>
+internal class EmployeeEntityMap : IEntityTypeConfiguration<Employee>
 {
     public void Configure(EntityTypeBuilder<Employee> builder)
     {
