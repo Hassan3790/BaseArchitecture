@@ -16,8 +16,16 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Page Include="Scripts\aspidentity.sql" />
+        <EmbeddedResource Include="Scripts\aspidentity.sql" />
+    </ItemGroup>
+    
+    <ItemGroup>
       <None Update="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Scripts\aspidentity.sql">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 

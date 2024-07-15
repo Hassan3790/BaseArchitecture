@@ -2,6 +2,8 @@ using _04.EndPoints.API.Configs;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BaseArchitecture.Infrastructures.Configs;
+using BaseArchitecture.Persistence.EF;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,15 @@ builder
     .RegisterMessageDispatcher()
     .RegisterHangfire(connectionString!)
     .RegisterDbContext(connectionString!);
+
+builder.Services.AddAuthentication()
+    .AddCookie(IdentityConstants.ApplicationScheme)
+    .AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddAuthorization();
+
+builder.Services.AddIdentityCore<IdentityUser>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddApiEndpoints();
 
 builder
     .Host
@@ -46,5 +57,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseHangfire();
+
+app.MapIdentityApi<IdentityUser>();
 
 app.Run();
