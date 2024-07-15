@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BaseArchitecture.Persistence.EF;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
-    DbContext(options)
+    IdentityDbContext(options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder
             .ApplyConfigurationsFromAssembly(
                 GetType().Assembly);
