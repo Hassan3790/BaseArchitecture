@@ -41,7 +41,7 @@ public static class DependencyInjectionConfig
     public static ContainerBuilder RegisterICommandHandler(this ContainerBuilder containerBuilder)
     {
         containerBuilder.RegisterAssemblyTypes(typeof(RegisterEmployeeCommandHandler).Assembly)
-            .AsClosedTypesOf(typeof(ICommandHandler<>))
+            .AsClosedTypesOf(typeof(ICommandHandler<,>))
             .InstancePerLifetimeScope();
 
         return containerBuilder;

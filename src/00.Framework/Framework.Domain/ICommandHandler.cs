@@ -1,6 +1,8 @@
-﻿namespace Framework.Domain;
+﻿using ErrorOr;
 
-public interface ICommandHandler<TCommand>
+namespace Framework.Domain;
+
+public interface ICommandHandler<TCommand, TResult>
 {
-    Task Handle(TCommand command);
+    Task<ErrorOr<TResult>> Handle(TCommand command);
 }

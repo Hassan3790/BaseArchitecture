@@ -81,7 +81,7 @@ namespace BaseArchitecture.TestTools.Configurations
                 .InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(typeof(RegisterEmployeeCommandHandler).Assembly)
-                .AsClosedTypesOf(typeof(ICommandHandler<>))
+                .AsClosedTypesOf(typeof(ICommandHandler<,>))
                 .InstancePerLifetimeScope();
 
             builder.Register(c =>

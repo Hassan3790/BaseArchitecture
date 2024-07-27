@@ -11,14 +11,14 @@ namespace BaseArchitecture.Application.Tests.Employees
 {
     public class RegisterEmployeeCommandHandlerTests : TestConfig
     {
-        private readonly ICommandHandler<RegisterEmployeeCommand> sut;
+        private readonly ICommandHandler<RegisterEmployeeCommand, string> sut;
         private readonly EmployeeWriteRepository employeeWriteRepository;
         private readonly EmployeeReadRepository employeeReadRepository;
         private readonly UnitOfWork unitOfWork;
 
         public RegisterEmployeeCommandHandlerTests()
         {
-            sut = Setup<ICommandHandler<RegisterEmployeeCommand>>();
+            sut = Setup<ICommandHandler<RegisterEmployeeCommand, string>>();
             employeeWriteRepository = Setup<EmployeeWriteRepository>();
             employeeReadRepository = Setup<EmployeeReadRepository>();
             unitOfWork = Setup<UnitOfWork>();

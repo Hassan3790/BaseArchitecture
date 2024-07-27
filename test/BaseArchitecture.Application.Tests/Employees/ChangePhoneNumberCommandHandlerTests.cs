@@ -11,13 +11,13 @@ namespace BaseArchitecture.Application.Tests.Employees
 {
     public class ChangePhoneNumberCommandHandlerTests : TestConfig
     {
-        private readonly ICommandHandler<ChangeEmployeePhoneNumberCommand> sut;
+        private readonly ICommandHandler<ChangeEmployeePhoneNumberCommand, string> sut;
         private readonly EmployeeWriteRepository employeeWriteRepository;
         private readonly UnitOfWork unitOfWork;
 
         public ChangePhoneNumberCommandHandlerTests()
         {
-            sut = Setup<ICommandHandler<ChangeEmployeePhoneNumberCommand>>();
+            sut = Setup<ICommandHandler<ChangeEmployeePhoneNumberCommand, string>>();
             employeeWriteRepository = Setup<EmployeeWriteRepository>();
             unitOfWork = Setup<UnitOfWork>();
         }

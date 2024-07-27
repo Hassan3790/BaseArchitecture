@@ -1,6 +1,7 @@
 ﻿using BaseArchitecture.ApplicationServices.Employees.Commands;
 using BaseArchitecture.Domain.Employees.Data;
 using BaseArchitecture.Domain.Employees.ViewModels;
+using ErrorOr;
 using Framework.Domain;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,19 +12,22 @@ namespace _04.EndPoints.API.Controllers;
 public class EmployeeController : ControllerBase
 {
     [HttpPost]
-    public async Task Register(
-        [FromServices] ICommandHandler<RegisterEmployeeCommand> handler,
+    public async Task<ErrorOr<string>> Register(
+        [FromServices]
+        ICommandHandler<RegisterEmployeeCommand, string> handler,
         [FromBody] RegisterEmployeeCommand command)
     {
-        await handler.Handle(command);
+        return await handler.Handle(command);
     }
 
     [HttpPatch("phone-number")]
-    public async Task ChangePhoneNumber(
-        [FromServices] ICommandHandler<ChangeEmployeePhoneNumberCommand> handler,
+    public async Task<ErrorOr<string>> ChangePhoneNumber(
+        [FromServices]
+        ICommandHandler<ChangeEmployeePhoneNumberCommand, string>
+            handler,
         ChangeEmployeePhoneNumberCommand command)
     {
-        await handler.Handle(command);
+        return await handler.Handle(command);
     }
 
     [HttpGet]
