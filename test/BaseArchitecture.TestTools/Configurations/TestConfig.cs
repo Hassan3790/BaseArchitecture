@@ -9,6 +9,7 @@ using Framework.Domain.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using BaseArchitecture.Infrastructures.Jobs;
+using BaseArchitecture.Persistence.EF.OutboxMessages;
 using Xunit;
 
 namespace BaseArchitecture.TestTools.Configurations
@@ -74,8 +75,13 @@ namespace BaseArchitecture.TestTools.Configurations
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
+            builder.RegisterType(typeof(OutboxManagement))
+                .As(typeof(IOutboxManagement))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
             builder.RegisterAssemblyTypes(typeof(RegisterEmployeeCommandHandler).Assembly)
-                .AsClosedTypesOf(typeof(ICommandHandler<>))
+                .AsClosedTypesOf(typeof(ICommandHandler<,>))
                 .InstancePerLifetimeScope();
 
             builder.Register(c =>

@@ -2,6 +2,7 @@
 using BaseArchitecture.Domain.Employees;
 using BaseArchitecture.Domain.Employees.Data;
 using BaseArchitecture.Domain.Employees.ValueObjects;
+using ErrorOr;
 using Framework.Domain;
 using Framework.Domain.Exceptions;
 
@@ -10,11 +11,15 @@ namespace BaseArchitecture.ApplicationServices.Employees;
 public class RegisterEmployeeCommandHandler(
     EmployeeWriteRepository employeeWriteRepository,
     UnitOfWork unitOfWork)
-    : ICommandHandler<RegisterEmployeeCommand>
+    : ICommandHandler<RegisterEmployeeCommand, string>
 {
-    public async Task Handle(RegisterEmployeeCommand command)
+    public async Task<ErrorOr<string>> Handle(RegisterEmployeeCommand command)
     {
-        await PreventAddWhenNationalCodeIsDuplicate(command);
+        var isExist = await employeeWriteRepository
+            .ExistNationalCode(new NationalCode(command.NationalCode));
+        
+        if (isExist)
+            return Error.Conflict("national code already exists");
 
         var employee = new Employee(
             new EmployeeId(Guid.NewGuid().ToString()),
@@ -24,16 +29,7 @@ public class RegisterEmployeeCommandHandler(
 
         await employeeWriteRepository.Add(employee);
         await unitOfWork.Complete();
-    }
-
-    private async Task PreventAddWhenNationalCodeIsDuplicate(
-        RegisterEmployeeCommand command)
-    {
-        var isExist = await employeeWriteRepository
-            .ExistNationalCode(new NationalCode(command.NationalCode));
-        if (isExist)
-        {
-            throw new DomainException("duplicate national code");
-        }
+        
+        return employee.Id.Value;
     }
 }

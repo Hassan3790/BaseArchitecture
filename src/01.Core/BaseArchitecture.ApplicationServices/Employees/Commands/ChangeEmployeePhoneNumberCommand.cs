@@ -2,11 +2,7 @@
 
 namespace BaseArchitecture.ApplicationServices.Employees.Commands
 {
-    public class ChangeEmployeePhoneNumberCommand
-    {
-        [Required]
-        public string EmployeeId { get; set; }
-        [Required]
-        public string PhoneNumber { get; set; }
-    }
+    public record ChangeEmployeePhoneNumberCommand(
+        string EmployeeId,
+        string PhoneNumber);
 }
