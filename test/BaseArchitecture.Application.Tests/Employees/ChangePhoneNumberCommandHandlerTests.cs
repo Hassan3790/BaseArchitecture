@@ -3,6 +3,7 @@ using BaseArchitecture.Domain.Employees;
 using BaseArchitecture.Domain.Employees.Data;
 using BaseArchitecture.Domain.Employees.ValueObjects;
 using BaseArchitecture.TestTools.Configurations;
+using ErrorOr;
 using FluentAssertions;
 using Framework.Domain;
 using Framework.Domain.Exceptions;
@@ -32,11 +33,9 @@ namespace BaseArchitecture.Application.Tests.Employees
                 new PhoneNumber("0913214567"));
             await employeeWriteRepository.Add(employee);
             await unitOfWork.Complete();
-            var command = new ChangeEmployeePhoneNumberCommand
-            {
-                EmployeeId = employee.Id.Value,
-                PhoneNumber = "0987654321"
-            };
+            var command = new ChangeEmployeePhoneNumberCommand(
+                employee.Id.Value,
+                "0987654321");
 
             await sut.Handle(command);
 
@@ -49,15 +48,15 @@ namespace BaseArchitecture.Application.Tests.Employees
         [Fact]
         public async Task Handle_ShouldThrowException_WhenEmployeeNotFound()
         {
-            var command = new ChangeEmployeePhoneNumberCommand
-            {
-                EmployeeId = Guid.NewGuid().ToString(),
-                PhoneNumber = "0987654321"
-            };
+            var command = new ChangeEmployeePhoneNumberCommand(
+                Guid.NewGuid().ToString(),
+                "0987654321");
 
-            var actualResult = () => sut.Handle(command);
+            var actualResult = await sut.Handle(command);
 
-            await actualResult.Should().ThrowExactlyAsync<DomainException>();
+            actualResult.IsError.Should().BeTrue();
+            actualResult.Errors.Should().HaveCount(1);
+            actualResult.Errors.First().Type.Should().Be(ErrorType.NotFound);
         }
     }
 }
