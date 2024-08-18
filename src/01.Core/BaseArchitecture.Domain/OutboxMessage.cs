@@ -1,4 +1,6 @@
-﻿namespace BaseArchitecture.Domain
+﻿using Framework.Domain.Events;
+
+namespace BaseArchitecture.Domain
 {
     public class OutboxMessage
     {
@@ -28,6 +30,12 @@
             Type = type;
             Content = content;
             OccurredTime = DateTime.UtcNow;
+        }
+
+        public void Publish()
+        {
+            PublishedTime = DateTime.UtcNow;
+            
         }
     }
 }

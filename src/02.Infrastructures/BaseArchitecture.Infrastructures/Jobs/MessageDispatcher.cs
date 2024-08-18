@@ -17,16 +17,10 @@ namespace BaseArchitecture.Infrastructures.Jobs
 
                 foreach (var handler in handlers)
                 {
-                    var eventHandler = handler;
-                    BackgroundJob.Enqueue(() => HandleEvent(eventHandler, @event));
+                    var method = handler.GetType().GetMethod("Handle");
+                    method.Invoke(handler, new object[] { @event });
                 }
             }
-        }
-
-        public void HandleEvent(object handler, object @event)
-        {
-            var method = handler.GetType().GetMethod("Handle");
-            method.Invoke(handler, new object[] { @event });
         }
     }
 }
