@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\01.Core\BaseArchitecture.ApplicationServices\BaseArchitecture.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\01.Core\BaseArchitecture.Application\BaseArchitecture.Application.csproj" />
     <ProjectReference Include="..\BaseArchitecture.Persistence.EF\BaseArchitecture.Persistence.EF.csproj" />
   </ItemGroup>
 

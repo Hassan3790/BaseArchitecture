@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Domain", "src\00.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseArchitecture.Domain", "src\01.Core\BaseArchitecture.Domain\BaseArchitecture.Domain.csproj", "{15743C5B-4BC5-4750-919E-34AAFD090550}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseArchitecture.ApplicationServices", "src\01.Core\BaseArchitecture.ApplicationServices\BaseArchitecture.ApplicationServices.csproj", "{7B60203E-226E-4C23-BAF1-583022C175D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseArchitecture.Application", "src\01.Core\BaseArchitecture.Application\BaseArchitecture.Application.csproj", "{7B60203E-226E-4C23-BAF1-583022C175D6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.EndPoints.API", "src\03.EndPoints\04.EndPoints.API\04.EndPoints.API.csproj", "{5CF267EE-C1CD-4CC7-9027-9DA74BC0AF0E}"
 EndProject
