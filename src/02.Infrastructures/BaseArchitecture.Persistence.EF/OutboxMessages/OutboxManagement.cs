@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace BaseArchitecture.Persistence.EF.OutboxMessages
 {
-    public class OutboxManagement(ApplicationDbContext context) : IOutboxManagement
+    public class OutboxManagement(ApplicationWriteDbContext context) : IOutboxManagement
     {
         public void Add(AggregateRoot aggregateRoot)
         {

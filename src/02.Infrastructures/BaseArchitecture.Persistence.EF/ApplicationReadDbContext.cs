@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BaseArchitecture.Persistence.EF;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
+public class ApplicationReadDbContext(DbContextOptions<ApplicationReadDbContext> options) :
     IdentityDbContext(options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -14,16 +14,16 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             .ApplyConfigurationsFromAssembly(
                 GetType().Assembly);
     }
-    
+
     public override ChangeTracker ChangeTracker
     {
         get
         {
             var tracker = base.ChangeTracker;
             tracker.LazyLoadingEnabled = false;
-            tracker.AutoDetectChangesEnabled = true;
+            tracker.AutoDetectChangesEnabled = false;
             tracker.QueryTrackingBehavior =
-                QueryTrackingBehavior.TrackAll;
+                QueryTrackingBehavior.NoTrackingWithIdentityResolution;
             return tracker;
         }
     }

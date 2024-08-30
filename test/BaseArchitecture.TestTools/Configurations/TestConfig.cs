@@ -18,8 +18,8 @@ namespace BaseArchitecture.TestTools.Configurations
     public class TestConfig : IDisposable
     {
         private readonly IContainer container;
-        protected readonly ApplicationDbContext writeDataContext;
-        protected readonly ApplicationDbContext readDataContext;
+        protected readonly ApplicationWriteDbContext writeDataContext;
+        protected readonly ApplicationWriteDbContext readDataContext;
         private readonly string connectionString;
 
         public TestConfig()
@@ -35,8 +35,8 @@ namespace BaseArchitecture.TestTools.Configurations
 
             container = builder.Build();
 
-            writeDataContext = container.Resolve<ApplicationDbContext>();
-            readDataContext = container.Resolve<ApplicationDbContext>();
+            writeDataContext = container.Resolve<ApplicationWriteDbContext>();
+            readDataContext = container.Resolve<ApplicationWriteDbContext>();
         }
 
         protected T Setup<T>()
@@ -46,7 +46,7 @@ namespace BaseArchitecture.TestTools.Configurations
 
         public void Dispose()
         {
-            using (var context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+            using (var context = new ApplicationWriteDbContext(new DbContextOptionsBuilder<ApplicationWriteDbContext>()
                        .UseSqlServer(connectionString).Options))
             {
                 context.Database.ExecuteSqlRaw(@"
@@ -86,10 +86,20 @@ namespace BaseArchitecture.TestTools.Configurations
 
             builder.Register(c =>
                 {
-                    var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                    var options = new DbContextOptionsBuilder<ApplicationWriteDbContext>()
                         .UseSqlServer(connectionString)
                         .Options;
-                    return new ApplicationDbContext(options);
+                    return new ApplicationWriteDbContext(options);
+                })
+                .AsSelf()
+                .InstancePerLifetimeScope();
+
+            builder.Register(c =>
+                {
+                    var options = new DbContextOptionsBuilder<ApplicationReadDbContext>()
+                        .UseSqlServer(connectionString)
+                        .Options;
+                    return new ApplicationReadDbContext(options);
                 })
                 .AsSelf()
                 .InstancePerLifetimeScope();

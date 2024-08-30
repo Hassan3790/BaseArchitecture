@@ -10,7 +10,7 @@ namespace BaseArchitecture.Worker.Hangfire;
 
 public class RaiseMessageHandler(
     IMessageDispatcher messageDispatcher,
-    ApplicationDbContext context)
+    ApplicationWriteDbContext context)
 {
     public async Task Handle()
     {

@@ -70,7 +70,12 @@ public static class DependencyInjectionConfig
         this IServiceCollection services,
         string connectionString)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddDbContextFactory<ApplicationWriteDbContext>(options =>
+        {
+            options.UseSqlServer(connectionString);
+        });
+
+        services.AddDbContextFactory<ApplicationReadDbContext>(options =>
         {
             options.UseSqlServer(connectionString);
         });

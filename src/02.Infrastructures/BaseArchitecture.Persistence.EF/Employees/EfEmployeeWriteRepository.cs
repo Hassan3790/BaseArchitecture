@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BaseArchitecture.Persistence.EF.Employees;
 
 public class EfEmployeeWriteRepository(
-    ApplicationDbContext context,
+    ApplicationWriteDbContext context,
     IOutboxManagement outboxManagement) : EmployeeWriteRepository
 {
     public async Task Add(Employee employee)
